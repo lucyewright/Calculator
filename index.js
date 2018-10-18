@@ -8,6 +8,15 @@ console.log(storeNum1, storeOperator, storeNum2);
 let display = document.getElementById("display");
 let answer = document.getElementById("answer");
 
+const fin = arg => {
+  if (calculationFin === true) {
+    displayNum = "";
+    storeNum1 = "";
+    storeOperator = "";
+    storeNum2 = "";
+  }
+};
+
 const clearDisplay = arg => {
   displayNum = "";
   storeNum1 = "";
@@ -64,13 +73,6 @@ const equalsClick = arg => {
 let equalsButton = document.getElementById("equals");
 
 equalsButton.addEventListener("click", equalsClick);
-
-if (calculationFin === true) {
-  displayNum = "";
-  storeNum1 = "";
-  storeOperator = "";
-  storeNum2 = "";
-}
 
 // const button1 = document.getElementById("one");
 // button1.addEventListener("click", numClick);
