@@ -4,6 +4,7 @@ let displayNum = "";
 let storeNum1 = "";
 let storeOperator = "";
 let storeNum2 = "";
+let decimal = "";
 
 let display = document.getElementById("display");
 let answer = document.getElementById("answer");
@@ -12,6 +13,7 @@ const clearDisplay = arg => {
   displayNum = "";
   storeNum1 = "";
   storeNum2 = "";
+  decimal = "";
   storeOperator = "";
   display.innerHTML = displayNum;
   answer.innerHTML = "";
@@ -35,7 +37,39 @@ for (let i = 0; i < numButtons.length; i++) {
   numButtons[i].addEventListener("click", numClick);
 }
 
-const decimalClick = arg => {};
+const decimalClick = e => {
+  (storeOperator === "") ? 
+    (if (displayNum === "") {
+      storeNum1 += 0;
+      storeNum1 += e.target.value;
+      displayNum += 0;
+      displayNum += e.target.value;
+    } else if (decimal === "") {
+      storeNum1 += e.target.value;
+      decimal += e.target.value;
+      displayNum += decimal;
+    } else if (decimal.length > 0) {
+      return;
+    } ) :
+    (if (displayNum === "") {
+      storeNum2 += 0;
+      storeNum2 += e.target.value;
+      displayNum += 0;
+      displayNum += e.target.value;
+    } else if (decimal === "") {
+      storeNum2 += e.target.value;
+      decimal += e.target.value;
+      displayNum += decimal;
+    } else if (decimal.length > 0) {
+      return;
+    })
+  }
+
+  display.innerHTML = displayNum;
+  answer.innerHTML = "";
+};
+let pointButton = document.getElementById("point");
+pointButton.addEventListener("click", decimalClick);
 
 const operatorClick = e => {
   displayNum = "";
