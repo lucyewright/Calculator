@@ -38,8 +38,8 @@ for (let i = 0; i < numButtons.length; i++) {
 }
 
 const decimalClick = e => {
-  (storeOperator === "") ? 
-    (if (displayNum === "") {
+  if (storeOperator === "") {
+    if (displayNum === "") {
       storeNum1 += 0;
       storeNum1 += e.target.value;
       displayNum += 0;
@@ -50,8 +50,9 @@ const decimalClick = e => {
       displayNum += decimal;
     } else if (decimal.length > 0) {
       return;
-    } ) :
-    (if (displayNum === "") {
+    }
+  } else if (storeOperator) {
+    if (displayNum === "") {
       storeNum2 += 0;
       storeNum2 += e.target.value;
       displayNum += 0;
@@ -62,7 +63,7 @@ const decimalClick = e => {
       displayNum += decimal;
     } else if (decimal.length > 0) {
       return;
-    })
+    }
   }
 
   display.innerHTML = displayNum;
@@ -73,6 +74,7 @@ pointButton.addEventListener("click", decimalClick);
 
 const operatorClick = e => {
   displayNum = "";
+  decimal = "";
   storeOperator += e.target.value;
   display.innerHTML = displayNum;
 };
