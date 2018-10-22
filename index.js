@@ -1,33 +1,32 @@
 import { getResult } from "./src/equalsClick";
 
 let displayNum = "";
-let storeNum1 = "";
+let storeSum = [];
 let storeOperator = "";
-let storeNum2 = "";
+let storeNum = "";
+let decimal = "";
 
 let display = document.getElementById("display");
-let answer = document.getElementById("answer");
-
+let rt = document.getElementById("running");
+console.log("test");
 const clearDisplay = arg => {
   displayNum = "";
-  storeNum1 = "";
-  storeNum2 = "";
+  storeSum = [];
+  storeNum = "";
   storeOperator = "";
+  decimal = "";
   display.innerHTML = displayNum;
-  answer.innerHTML = "";
+  rt.innerHTML = storeSum;
 };
 let clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", clearDisplay);
 
 const numClick = e => {
+  storeNum += e.target.value;
+  storeSum += e.target.value;
   displayNum += e.target.value;
-  if (storeOperator === "") {
-    storeNum1 += e.target.value;
-  } else if (storeOperator) {
-    storeNum2 += e.target.value;
-  }
   display.innerHTML = displayNum;
-  answer.innerHTML = "";
+  rt.innerHTML = storeSum;
 };
 let numButtons = document.getElementsByClassName("number");
 for (let i = 0; i < numButtons.length; i++) {
@@ -35,10 +34,37 @@ for (let i = 0; i < numButtons.length; i++) {
   numButtons[i].addEventListener("click", numClick);
 }
 
-const decimalClick = arg => {};
+const pointOperator = (arg, e) => {
+  if (displayNum === "") {
+    arg += 0;
+    arg += e.target.value;
+    decimal += e.target.value;
+    displayNum += 0;
+    displayNum += decimal;
+    storeSum += 0;
+    storeSum += e.target.value;
+  } else if (decimal === "") {
+    arg += e.target.value;
+    decimal += e.target.value;
+    displayNum += decimal;
+    storeSum += decimal;
+  } else if (decimal.length > 0) {
+    return;
+  }
+};
+
+const decimalClick = e => {
+  pointOperator(storeNum, e);
+  display.innerHTML = displayNum;
+  rt.innerHTML = storeSum;
+};
+let pointButton = document.getElementById("point");
+pointButton.addEventListener("click", decimalClick);
 
 const operatorClick = e => {
   displayNum = "";
+  decimal = "";
+  storeSum += e.target.value;
   storeOperator += e.target.value;
   display.innerHTML = displayNum;
 };
@@ -49,13 +75,15 @@ for (let i = 0; i < operatorButtons.length; i++) {
 }
 
 const equalsClick = arg => {
-  const result = getResult(storeNum1, storeOperator, storeNum2);
-  answer.innerHTML = result;
+  let sumArr = sum.split("+", "-", "*", "/");
+  console.log(sumArr);
+  display.innerHTML = result;
   displayNum = "";
-  storeNum1 = "";
   storeOperator = "";
-  storeNum2 = "";
+  storeSum = "";
 };
 
 let equalsButton = document.getElementById("equals");
 equalsButton.addEventListener("click", equalsClick);
+
+console.log(displayNum, storeSum, storeOperator, decimal);
