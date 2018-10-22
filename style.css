@@ -35,21 +35,6 @@ input {
   border-right: 1px solid black;
 }
 
-/* #answer {
-  margin: 0px 0px 2px 0px;
-  padding: 0px 2px;
-  grid-column-start: col1-start;
-  grid-column-end: col-end;
-  grid-row-start: output;
-  grid-row-end: but1-start;
-  font-size: 12px;
-  height: 1.4em;
-  text-align: right;
-  border: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-} */
-
 #running {
   margin: 0px 0px 2px 0px;
   padding: 0px 2px;
@@ -186,7 +171,7 @@ input {
 
 #clear {
   grid-column-start: col1-start;
-  grid-column-end: col2-start;
+  grid-column-end: col3-start;
   grid-row-start: but1-start;
   grid-row-end: but2-start;
 }
