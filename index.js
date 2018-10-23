@@ -1,7 +1,7 @@
 let displayNum = "";
-let storeSum = [];
-let storeOperator = "";
 let storeNum = "";
+let storeSum = "";
+let storeOperator = "";
 let decimal = "";
 let lastClicked = "";
 
@@ -12,10 +12,11 @@ let rt = document.getElementById("running");
 
 const clearDisplay = arg => {
   displayNum = "";
-  storeSum = [];
+  storeSum = "";
   storeNum = "";
   storeOperator = "";
   decimal = "";
+  lastClicked = "";
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
 };
@@ -32,6 +33,7 @@ const numClick = e => {
   } else {
     displayNum = "MAX LIMIT";
   }
+  lastClicked = e.target.value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
 };
@@ -61,6 +63,7 @@ const pointOperator = (num, e) => {
 
 const decimalClick = e => {
   pointOperator(storeNum, e);
+  lastClicked = e.target.value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
 };
@@ -84,11 +87,20 @@ for (let i = 0; i < operatorButtons.length; i++) {
 }
 
 const equalsClick = sum => {
-  let sumArr = sum.split("+", "-", "*", "/");
-  displayNum = "";
-  storeOperator = "";
+  console.log(storeSum.length);
+  console.log(storeSum.split("+", "-", "x", "÷"));
+  if (lastClicked !== "+" || "-" || "x" || "÷") {
+    storeSum.split("+", "-", "x", "÷");
+  }
+  displayNum = storeSum;
+  storeNum = "";
   storeSum = "";
+  storeOperator = "";
+  decimal = "";
 };
+
+let equalsButton = document.getElementById("equals");
+equalsButton.addEventListener("click", equalsClick);
 
 // TODO: Use toFixed() to limit number of decimal places
 // let fixed = (0.1 + 0.2).toFixed(6);
@@ -96,6 +108,3 @@ const equalsClick = sum => {
 // let reduce = Number(fixed).toPrecision(2);
 // console.log(reduce);
 // TODO: work out how many 0's at the end, reduce to length - that many.
-
-let equalsButton = document.getElementById("equals");
-equalsButton.addEventListener("click", equalsClick);
