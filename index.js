@@ -7,6 +7,8 @@ let decimal = "";
 let display = document.getElementById("display");
 let rt = document.getElementById("running");
 
+// TODO: When adding +/- button use Math.abs() to get from negative to positive.
+
 const clearDisplay = arg => {
   displayNum = "";
   storeSum = [];
