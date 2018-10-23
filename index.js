@@ -3,6 +3,7 @@ let storeSum = [];
 let storeOperator = "";
 let storeNum = "";
 let decimal = "";
+let lastClicked = "";
 
 let display = document.getElementById("display");
 let rt = document.getElementById("running");
@@ -22,10 +23,14 @@ let clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", clearDisplay);
 
 const numClick = e => {
-  if (storeNum.length < 15) {
+  displayNum = "";
+  storeOperator = "";
+  if (storeNum.length < 10) {
     storeNum += e.target.value;
     storeSum += e.target.value;
     displayNum += e.target.value;
+  } else {
+    displayNum = "MAX LIMIT";
   }
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
@@ -37,23 +42,20 @@ for (let i = 0; i < numButtons.length; i++) {
 
 // TODO: add conditions for 0
 
-const pointOperator = (arg, e) => {
-  if (storeNum < 14) {
-    if (displayNum === "") {
-      arg += 0;
-      arg += e.target.value;
-      decimal += e.target.value;
-      displayNum += 0;
-      displayNum += decimal;
-      storeSum += 0;
-      storeSum += e.target.value;
-    } else if (decimal === "") {
-      arg += e.target.value;
-      decimal += e.target.value;
-      displayNum += decimal;
-      storeSum += decimal;
-    } else if (decimal.length > 0) {
-    }
+const pointOperator = (num, e) => {
+  if (displayNum === "") {
+    num += 0;
+    num += e.target.value;
+    decimal += e.target.value;
+    displayNum += 0;
+    displayNum += decimal;
+    storeSum += 0;
+    storeSum += e.target.value;
+  } else if (decimal === "") {
+    num += e.target.value;
+    decimal += e.target.value;
+    displayNum += decimal;
+    storeSum += decimal;
   }
 };
 
@@ -66,11 +68,13 @@ let pointButton = document.getElementById("point");
 pointButton.addEventListener("click", decimalClick);
 
 const operatorClick = e => {
-  displayNum = "";
-  decimal = "";
-  storeNum = "";
-  storeSum += e.target.value;
-  storeOperator += e.target.value;
+  if (storeOperator === "") {
+    displayNum = e.target.value;
+    decimal = "";
+    storeNum = "";
+    storeSum += e.target.value;
+    storeOperator += e.target.value;
+  }
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
 };
