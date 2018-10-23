@@ -1,5 +1,3 @@
-import { getResult } from "./src/equalsClick";
-
 let displayNum = "";
 let storeSum = [];
 let storeOperator = "";
@@ -8,7 +6,7 @@ let decimal = "";
 
 let display = document.getElementById("display");
 let rt = document.getElementById("running");
-console.log("test");
+
 const clearDisplay = arg => {
   displayNum = "";
   storeSum = [];
@@ -34,6 +32,8 @@ for (let i = 0; i < numButtons.length; i++) {
   numButtons[i].addEventListener("click", numClick);
 }
 
+// TODO: add conditions for 0
+
 const pointOperator = (arg, e) => {
   if (displayNum === "") {
     arg += 0;
@@ -49,7 +49,6 @@ const pointOperator = (arg, e) => {
     displayNum += decimal;
     storeSum += decimal;
   } else if (decimal.length > 0) {
-    return;
   }
 };
 
@@ -74,10 +73,8 @@ for (let i = 0; i < operatorButtons.length; i++) {
   operatorButtons[i].addEventListener("click", operatorClick);
 }
 
-const equalsClick = arg => {
+const equalsClick = sum => {
   let sumArr = sum.split("+", "-", "*", "/");
-  console.log(sumArr);
-  display.innerHTML = result;
   displayNum = "";
   storeOperator = "";
   storeSum = "";
