@@ -1,9 +1,11 @@
 let displayNum = "";
 let storeNum = "";
-let storeSum = "";
+let storeSum = [];
 let storeOperator = "";
 let decimal = "";
 let lastClicked = "";
+
+let wholeNum = "";
 
 let display = document.getElementById("display");
 let rt = document.getElementById("running");
@@ -12,10 +14,11 @@ let rt = document.getElementById("running");
 
 const clearDisplay = arg => {
   displayNum = "";
-  storeSum = "";
+  storeSum = [];
   storeNum = "";
   storeOperator = "";
   decimal = "";
+  wholeNum = "";
   lastClicked = "";
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
@@ -24,19 +27,33 @@ let clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", clearDisplay);
 
 const numClick = e => {
-  displayNum = "";
-  storeOperator = "";
+  if (lastClicked === "+") {
+    displayNum = "";
+  } else if (lastClicked === "-") {
+    displayNum = "";
+  } else if (lastClicked === "x") {
+    displayNum = "";
+  } else if (lastClicked === "÷") {
+    displayNum = "";
+  } else if (lastClicked === "=") {
+    displayNum = "";
+    storeNum = "";
+    storeSum = [];
+    decimal = "";
+    storeOperator = "";
+  }
   if (storeNum.length < 10) {
     storeNum += e.target.value;
-    storeSum += e.target.value;
+    storeSum.push(e.target.value);
     displayNum += e.target.value;
   } else {
     displayNum = "MAX LIMIT";
   }
-  lastClicked = e.target.value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
+  lastClicked = e.target.value;
 };
+
 let numButtons = document.getElementsByClassName("number");
 for (let i = 0; i < numButtons.length; i++) {
   numButtons[i].addEventListener("click", numClick);
@@ -44,40 +61,23 @@ for (let i = 0; i < numButtons.length; i++) {
 
 // TODO: add conditions for 0
 
-const pointOperator = (num, e) => {
-  if (displayNum === "") {
-    num += 0;
-    num += e.target.value;
-    decimal += e.target.value;
-    displayNum += 0;
-    displayNum += decimal;
-    storeSum += 0;
-    storeSum += e.target.value;
-  } else if (decimal === "") {
-    num += e.target.value;
-    decimal += e.target.value;
-    displayNum += decimal;
-    storeSum += decimal;
-  }
-};
-
-const decimalClick = e => {
-  pointOperator(storeNum, e);
-  lastClicked = e.target.value;
-  display.innerHTML = displayNum;
-  rt.innerHTML = storeSum;
-};
-let pointButton = document.getElementById("point");
-pointButton.addEventListener("click", decimalClick);
-
 const operatorClick = e => {
+  storeSum.push(wholeNum);
+  console.log(wholeNum);
   if (storeOperator === "") {
     displayNum = e.target.value;
     decimal = "";
     storeNum = "";
-    storeSum += e.target.value;
+    if (e.target.value === "+" || "-") {
+      storeSum.push(e.target.value);
+    } else if (e.target.value === "x") {
+      storeSum.push("*");
+    } else if (e.target.value === "÷") {
+      storeSum.push("/");
+    }
     storeOperator += e.target.value;
   }
+  lastClicked = e.target.value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum;
 };
@@ -86,13 +86,56 @@ for (let i = 0; i < operatorButtons.length; i++) {
   operatorButtons[i].addEventListener("click", operatorClick);
 }
 
-const equalsClick = sum => {
-  console.log(storeSum.length);
-  console.log(storeSum.split("+", "-", "x", "÷"));
-  if (lastClicked !== "+" || "-" || "x" || "÷") {
-    storeSum.split("+", "-", "x", "÷");
+const decimalClick = e => {
+  wholeNum = displayNum;
+  if (displayNum === "") {
+    lastClicked = e.target.value;
+    storeNum += 0;
+    storeNum += e.target.value;
+    decimal += e.target.value;
+    displayNum += 0;
+    displayNum += decimal;
+    storeSum.push(0);
+    storeSum.push(e.target.value);
+  } else if (decimal === "") {
+    lastClicked = e.target.value;
+    storeNum += e.target.value;
+    decimal += e.target.value;
+    displayNum += decimal;
+    storeSum.push(decimal);
   }
-  displayNum = storeSum;
+
+  display.innerHTML = displayNum;
+  rt.innerHTML = storeSum;
+};
+let pointButton = document.getElementById("point");
+pointButton.addEventListener("click", decimalClick);
+
+export const calculate = (num1, o, num2) => {
+  let n1 = Number(num1);
+  let n2 = Number(num2);
+  switch (o) {
+    case "+": {
+      return n1 + n2;
+    }
+    case "-": {
+      return n1 - n2;
+    }
+    case "x": {
+      return n1 * n2;
+    }
+    case "/": {
+      return n1 / n2;
+    }
+    default: {
+      return undefined;
+    }
+  }
+};
+
+const equalsClick = sum => {
+  calculate(n1, o, n2);
+  display.innerHTML = displayNum;
   storeNum = "";
   storeSum = "";
   storeOperator = "";
