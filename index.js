@@ -36,7 +36,12 @@ const isOperator = entry => {
 
 const numClick = e => {
   let value = e.target.value;
-
+  storeOperator = "";
+  if (lastClicked === "=") {
+    resetStore();
+    display.innerHTML = displayNum;
+    rt.innerHTML = storeSum;
+  }
   if (isOperator(lastClicked)) {
     displayNum = "";
   } else if (lastClicked === "=") {
@@ -102,11 +107,12 @@ const decimalClick = e => {
 let point = document.getElementById("point");
 point.addEventListener("click", decimalClick);
 
-const equalsClick = () => {
+const equalsClick = e => {
+  lastClicked = e.target.value;
   storeSum.push(displayNum);
   displayNum = equals(storeSum);
   display.innerHTML = displayNum;
-  storeSum = "";
+  storeSum = [];
   storeOperator = "";
   decimal = "";
 };
