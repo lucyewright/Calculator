@@ -11,7 +11,7 @@ export const calculate = (num1, o, num2) => {
     case "x": {
       return n1 * n2;
     }
-    case "/": {
+    case "÷": {
       return n1 / n2;
     }
     default: {
@@ -21,7 +21,7 @@ export const calculate = (num1, o, num2) => {
 };
 
 export const initialOperators = sum => {
-  return sum.findIndex(item => item === "x" || item === "/");
+  return sum.findIndex(item => item === "x" || item === "÷");
 };
 
 export const secondOperators = sum => {
@@ -30,7 +30,7 @@ export const secondOperators = sum => {
 
 export const operatorEnd = sum => {
   let last = sum[sum.length - 1];
-  if (last === "+" || last === "-" || last === "x" || last === "/") {
+  if (last === "+" || last === "-" || last === "x" || last === "÷") {
     return true;
   }
   return false;

@@ -28,24 +28,26 @@ const resetStore = () => {
 };
 
 const isOperator = entry => {
-  if (entry === "+" || entry === "-" || entry === "x" || entry === "/") {
+  if (entry === "+" || entry === "-" || entry === "x" || entry === "÷") {
     return true;
   }
   return false;
 };
 
+// TODO: work out WHY divide isn't being cleared from display before inputting num
+// EG. ["9", "÷", "÷3"]
+
 const numClick = e => {
   let value = e.target.value;
+  lastClicked = value;
   storeOperator = "";
+  if (isOperator(lastClicked)) {
+    displayNum = "";
+  }
   if (lastClicked === "=") {
     resetStore();
     display.innerHTML = displayNum;
     rt.innerHTML = storeSum;
-  }
-  if (isOperator(lastClicked)) {
-    displayNum = "";
-  } else if (lastClicked === "=") {
-    resetStore();
   }
   if (displayNum === "0") {
     displayNum = "";
@@ -53,10 +55,12 @@ const numClick = e => {
   if (displayNum.length < 10) {
     displayNum += value;
   }
-  console.log(displayNum);
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ") + displayNum;
-  lastClicked = value;
+  console.log("dN", displayNum);
+  console.log("v", value);
+  console.log("sO", storeOperator);
+  console.log("sS", storeSum);
 };
 
 let numButtons = document.getElementsByClassName("number");
@@ -67,18 +71,17 @@ for (let i = 0; i < numButtons.length; i++) {
 const operatorClick = e => {
   storeSum.push(displayNum);
   let value = e.target.value;
-  if (storeOperator === "") {
-    displayNum = value;
-    decimal = "";
-    if (value === "+" || value === "-" || value === "x") {
-      storeSum.push(value);
-    } else if (value === "÷") {
-      storeSum.push("/");
-    }
-    storeOperator = value;
-  }
-  console.log(displayNum);
   lastClicked = value;
+  if (storeOperator === "") {
+    storeOperator = value;
+    displayNum = storeOperator;
+    decimal = "";
+    storeSum.push(value);
+  }
+  console.log("dN", displayNum);
+  console.log("v", value);
+  console.log("sO", storeOperator);
+  console.log("sS", storeSum);
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ");
 };
@@ -99,7 +102,6 @@ const decimalClick = e => {
     decimal += e.target.value;
     displayNum += decimal;
   }
-  console.log(displayNum);
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ") + displayNum;
 };
@@ -110,6 +112,7 @@ point.addEventListener("click", decimalClick);
 const equalsClick = e => {
   lastClicked = e.target.value;
   storeSum.push(displayNum);
+  console.log("E sS", storeSum);
   displayNum = equals(storeSum);
   display.innerHTML = displayNum;
   storeSum = [];
