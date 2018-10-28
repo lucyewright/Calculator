@@ -69,7 +69,9 @@ for (let i = 0; i < numButtons.length; i++) {
 }
 
 const operatorClick = e => {
-  storeSum.push(displayNum);
+  if (!isOperator(lastClicked)) {
+    storeSum.push(displayNum);
+  }
   let value = e.target.value;
   lastClicked = value;
   if (storeOperator === "") {
@@ -78,10 +80,6 @@ const operatorClick = e => {
     decimal = "";
     storeSum.push(value);
   }
-  console.log("oCdN", displayNum);
-  console.log("oCv", value);
-  console.log("oCsO", storeOperator);
-  console.log("oCsS", storeSum);
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ");
 };
