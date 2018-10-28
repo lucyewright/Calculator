@@ -11,8 +11,7 @@ main {
   box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.5);
   color: silver;
   position: fixed;
-  right: 40%;
-  left: 60%;
+  right: 100px;
   margin: 50px;
   border: 1px solid black;
   border-radius: 15px;
