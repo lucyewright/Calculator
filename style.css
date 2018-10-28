@@ -2,6 +2,7 @@ body {
   display: flex;
   align-content: center;
   justify-content: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 main {
@@ -28,6 +29,7 @@ input {
   grid-row-start: input;
   grid-row-end: output;
   font-size: 16px;
+  font-family: digital;
   height: 1.4em;
   text-align: right;
   border: 1px solid black;
@@ -45,9 +47,13 @@ input {
   font-size: 12px;
   height: 1.4em;
   text-align: right;
+  vertical-align: text-top;
+  line-height: 14px;
   border: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 #one {
