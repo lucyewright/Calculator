@@ -57,10 +57,6 @@ const numClick = e => {
   lastClicked = value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ") + displayNum;
-  console.log("nCdN", displayNum);
-  console.log("nCv", value);
-  console.log("nCsO", storeOperator);
-  console.log("nCsS", storeSum);
 };
 
 let numButtons = document.getElementsByClassName("number");
@@ -120,10 +116,3 @@ const equalsClick = e => {
 
 let equalsButton = document.getElementById("equals");
 equalsButton.addEventListener("click", equalsClick);
-
-// TODO: Use toFixed() to limit number of decimal places
-let fixed = (0.1 + 0.2).toFixed(6);
-console.log(fixed);
-let reduce = Number(fixed).toPrecision(2);
-console.log(reduce);
-// TODO: work out how many 0's at the end, reduce to length - that many.
