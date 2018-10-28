@@ -57,10 +57,6 @@ const numClick = e => {
   lastClicked = value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ") + displayNum;
-  console.log("nCdN", displayNum);
-  console.log("nCv", value);
-  console.log("nCsO", storeOperator);
-  console.log("nCsS", storeSum);
 };
 
 let numButtons = document.getElementsByClassName("number");
@@ -69,7 +65,9 @@ for (let i = 0; i < numButtons.length; i++) {
 }
 
 const operatorClick = e => {
-  storeSum.push(displayNum);
+  if (!isOperator(lastClicked)) {
+    storeSum.push(displayNum);
+  }
   let value = e.target.value;
   lastClicked = value;
   if (storeOperator === "") {
@@ -78,10 +76,6 @@ const operatorClick = e => {
     decimal = "";
     storeSum.push(value);
   }
-  console.log("oCdN", displayNum);
-  console.log("oCv", value);
-  console.log("oCsO", storeOperator);
-  console.log("oCsS", storeSum);
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ");
 };
@@ -122,10 +116,3 @@ const equalsClick = e => {
 
 let equalsButton = document.getElementById("equals");
 equalsButton.addEventListener("click", equalsClick);
-
-// TODO: Use toFixed() to limit number of decimal places
-let fixed = (0.1 + 0.2).toFixed(6);
-console.log(fixed);
-let reduce = Number(fixed).toPrecision(2);
-console.log(reduce);
-// TODO: work out how many 0's at the end, reduce to length - that many.
