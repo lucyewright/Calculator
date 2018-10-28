@@ -39,7 +39,6 @@ const isOperator = entry => {
 
 const numClick = e => {
   let value = e.target.value;
-  lastClicked = value;
   storeOperator = "";
   if (isOperator(lastClicked)) {
     displayNum = "";
@@ -55,12 +54,13 @@ const numClick = e => {
   if (displayNum.length < 10) {
     displayNum += value;
   }
+  lastClicked = value;
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ") + displayNum;
-  console.log("dN", displayNum);
-  console.log("v", value);
-  console.log("sO", storeOperator);
-  console.log("sS", storeSum);
+  console.log("nCdN", displayNum);
+  console.log("nCv", value);
+  console.log("nCsO", storeOperator);
+  console.log("nCsS", storeSum);
 };
 
 let numButtons = document.getElementsByClassName("number");
@@ -78,10 +78,10 @@ const operatorClick = e => {
     decimal = "";
     storeSum.push(value);
   }
-  console.log("dN", displayNum);
-  console.log("v", value);
-  console.log("sO", storeOperator);
-  console.log("sS", storeSum);
+  console.log("oCdN", displayNum);
+  console.log("oCv", value);
+  console.log("oCsO", storeOperator);
+  console.log("oCsS", storeSum);
   display.innerHTML = displayNum;
   rt.innerHTML = storeSum.join(" ");
 };
@@ -112,9 +112,9 @@ point.addEventListener("click", decimalClick);
 const equalsClick = e => {
   lastClicked = e.target.value;
   storeSum.push(displayNum);
-  console.log("E sS", storeSum);
   displayNum = equals(storeSum);
-  display.innerHTML = displayNum;
+  let answer = Number(displayNum).toFixed(8);
+  display.innerHTML = Number(answer).toPrecision();
   storeSum = [];
   storeOperator = "";
   decimal = "";
@@ -124,8 +124,8 @@ let equalsButton = document.getElementById("equals");
 equalsButton.addEventListener("click", equalsClick);
 
 // TODO: Use toFixed() to limit number of decimal places
-// let fixed = (0.1 + 0.2).toFixed(6);
-// console.log(fixed);
-// let reduce = Number(fixed).toPrecision(2);
-// console.log(reduce);
+let fixed = (0.1 + 0.2).toFixed(6);
+console.log(fixed);
+let reduce = Number(fixed).toPrecision(2);
+console.log(reduce);
 // TODO: work out how many 0's at the end, reduce to length - that many.
