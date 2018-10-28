@@ -34,9 +34,6 @@ const isOperator = entry => {
   return false;
 };
 
-// TODO: work out WHY divide isn't being cleared from display before inputting num
-// EG. ["9", "÷", "÷3"]
-
 const numClick = e => {
   let value = e.target.value;
   storeOperator = "";
@@ -104,11 +101,11 @@ let point = document.getElementById("point");
 point.addEventListener("click", decimalClick);
 
 const equalsClick = e => {
-  lastClicked = e.target.value;
   storeSum.push(displayNum);
   displayNum = equals(storeSum);
   let answer = Number(displayNum).toFixed(8);
   display.innerHTML = Number(answer).toPrecision();
+  lastClicked = e.target.value;
   storeSum = [];
   storeOperator = "";
   decimal = "";
