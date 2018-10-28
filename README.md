@@ -1,4 +1,4 @@
-## Lucy's Calculator
+## [Lucy's Calculator](https://lucyewright.github.io/Calculator/)
 So this is my _first_ attempt at a calculator!
 
 This was part of my pre-course materials beofre starting **Founders and Coders** in Oct 2018.
