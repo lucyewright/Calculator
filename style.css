@@ -58,7 +58,7 @@ main {
   border-radius: 5px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  overflow-x: scroll;
+  overflow-y: auto;
   border-width: 2px 2px 2px 2px;
   border-style: outset outset outset outset;
   border-color: silver silver silver silver;
