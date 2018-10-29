@@ -75,7 +75,7 @@ main {
 
 input {
   border-top: 1px solid silver;
-  -webkit-border-image: -webkit-gradient(
+  border-image: -webkit-gradient(
       linear,
       0 0,
       0 100%,
